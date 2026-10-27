@@ -1,0 +1,30 @@
+.t3 header{padding:6px 0}
+.t3 header p{margin:2px 0 0;color:var(--mut);font-size:14px}
+.t3 nav{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.t3 nav button,.t3 .tool button{font:inherit;font-size:14px;font-weight:400;padding:7px 12px;border:1px solid var(--bd);border-radius:8px;background:transparent;color:var(--fg);cursor:pointer}
+.t3 nav button[aria-selected="true"]{background:var(--ac);color:var(--acfg);border-color:var(--ac)}
+.t3 .tool{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.t3 .paper{background:#fff;color:#222;border-radius:10px;padding:26px 28px;box-shadow:0 1px 6px rgba(0,0,0,.18);overflow-x:auto}
+.t3 .paper h2{color:#0b3c49;margin:0 0 4px;font-size:24px}
+.t3 .paper h3{color:#c2255c;margin:22px 0 6px;font-size:16px}
+.t3 .tag{display:block;background:#0b3c49;color:#fff;font-size:12px;letter-spacing:.15em;padding:4px 10px;margin-bottom:12px}
+.t3 .box{background:#f2f2f2;padding:12px 14px;border-radius:6px;font-family:Consolas,"Courier New",monospace;font-size:14px;white-space:pre-wrap}
+.t3 .bad{color:#b00020;font-weight:700}
+.t3 .note{color:#666;font-style:italic;font-size:14px}
+.t3 .m{font:13px/1.45 Consolas,"Courier New",monospace;margin:1px 0;word-break:break-word}
+.t3 .m i{color:#888;font-style:normal}
+.t3 .m b{font-weight:700}
+.t3 .sys{color:#999;font-style:italic}
+.t3 .tiny{font-size:6px;color:#a6a6a6;line-height:1.2}
+.t3 .hid{color:#fff}
+.t3 .cm{border:0;background:#ffd54f;color:#222;border-radius:4px;font-size:11px;font-weight:400;padding:0 5px;margin-left:6px;cursor:pointer}
+.t3 .pop{margin:4px 0 6px 20px;border-left:3px solid #ffd54f;background:#fff8e1;color:#222;padding:6px 10px;font:13px system-ui,sans-serif;display:none}
+.t3 .pop.on{display:block}
+.t3 dl.props{display:none;margin:0 0 14px;padding:12px 14px;background:#eef3f5;color:#222;border-radius:6px;font-size:14px;grid-template-columns:130px 1fr;gap:4px 10px}
+.t3 dl.props.on{display:grid}
+.t3 dl.props dt{font-weight:700;color:#0b3c49}
+.t3 dl.props dd{margin:0}
+.t3 table{border-collapse:collapse;width:100%;font-size:14px}
+.t3 td,.t3 th{border:1px solid #ccc;padding:6px 9px;text-align:left}
+.t3 th{background:#0b3c49;color:#fff}
+.t3 .quote{border-left:4px solid #c2255c;padding:4px 12px;color:#444;font-style:italic;margin:8px 0}

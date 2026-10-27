@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Retake the Mainframe</title>
+<style>
+:root{--bg:#f1f4f6;--fg:#14232b;--ac:#0b3c49;--acfg:#fff;--pk:#c2255c;--mut:#5c6b73;--bd:#cfd8dd;--card:#fff;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root{--bg:#0e171c;--fg:#e6eef2;--ac:#7cc4d6;--acfg:#0e171c;--pk:#ff7aa2;--mut:#93a4ad;--bd:#2b3b44;--card:#15232a;color-scheme:dark}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.wrap{max-width:760px;margin:auto;padding:28px 16px 60px}
+h1{font-size:30px;line-height:1.15;margin:0 0 6px;color:var(--ac)}
+.sub{color:var(--mut);margin:0 0 22px}
+.miss{border-left:4px solid var(--pk);padding:6px 14px;margin:0 0 28px;font-style:italic}
+.miss b{font-style:normal;color:var(--pk)}
+.task{background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:16px 18px;margin-bottom:14px}
+.task h2{margin:0 0 2px;font-size:19px;color:var(--ac)}
+.task p{margin:0 0 10px;color:var(--mut);font-size:15px}
+.task.locked h2{color:var(--mut)}
+.badge{float:right;font-size:13px;padding:2px 9px;border-radius:99px;border:1px solid var(--bd);color:var(--mut)}
+.badge.open{background:var(--ac);color:var(--acfg);border-color:var(--ac)}
+a.go{display:inline-block;background:var(--ac);color:var(--acfg);text-decoration:none;padding:8px 16px;border-radius:8px;font-weight:600}
+form{display:flex;gap:8px;flex-wrap:wrap}
+input{font:inherit;padding:8px 12px;border:1px solid var(--bd);border-radius:8px;background:transparent;color:var(--fg);flex:1;min-width:180px;font-family:Consolas,"Courier New",monospace}
+button{font:inherit;padding:8px 16px;border:0;border-radius:8px;background:var(--ac);color:var(--acfg);font-weight:600;cursor:pointer}
+.err{color:var(--pk);font-size:14px;margin-top:6px;min-height:1em}
+.hint{font-size:14px;color:var(--mut);margin:0 0 8px}
+:focus-visible{outline:2px solid var(--pk);outline-offset:2px}
+</style></head>
+<body><div class="wrap">
+<h1>Retake the Mainframe</h1>
+<p class="sub">A rogue AI has infiltrated our systems. Win each game to take a piece of it back.</p>
+<div class="miss"><b>Miss AI:</b> Agents, I’m on your side. Every game you solve gives you a code. Enter it to open the next one. Good luck.</div>
+<div id="list"></div>
+</div>
+<script src="assets/config.js"></script>
+<script src="assets/gate.js"></script>
+<script>
+const list=document.getElementById("list");
+function render(){
+  const un=Gate.getUnlocked();list.replaceChildren();
+  WORKSHOP.tasks.forEach(t=>{
+    const open=t.n<=un,c=document.createElement("section");
+    c.className="task"+(open?"":" locked");
+    c.innerHTML=`<span class="badge ${open?"open":""}">${open?"Unlocked":"Locked"}</span><h2>Game ${t.n}: ${t.title}</h2><p>${t.blurb}</p>`;
+    if(open){const a=document.createElement("a");a.className="go";a.href=t.file;a.textContent="Start game "+t.n;c.appendChild(a)}
+    else if(t.n===un+1){
+      c.insertAdjacentHTML("beforeend",`<p class="hint">Enter the code from Game ${t.n-1} to unlock this game.</p><form><input aria-label="Code for game ${t.n}" placeholder="Enter code" autocomplete="off" autocapitalize="off" spellcheck="false"><button>Unlock</button></form><div class="err" role="alert"></div>`);
+      const f=c.querySelector("form"),i=c.querySelector("input"),e=c.querySelector(".err");
+      f.onsubmit=async ev=>{ev.preventDefault();
+        if(await Gate.hashCode(i.value)===t.unlock){Gate.setUnlocked(t.n);render()}
+        else{e.textContent="That code didn’t work. Check it and try again.";i.select()}};
+    } else c.insertAdjacentHTML("beforeend",`<p class="hint">Finish the earlier games first.</p>`);
+    list.appendChild(c);
+  });
+}
+render();
+</script></body></html>

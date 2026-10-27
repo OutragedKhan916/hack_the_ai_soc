@@ -29,8 +29,11 @@ section.card p{margin:0 0 10px}
 :focus-visible{outline:2px solid var(--pk);outline-offset:2px}
 </style>
 </head><body>
-<!-- Keeps people out until the previous code is entered. Don't remove. -->
+
+<!-- Configuration and Gate scripts with correct relative path -->
+<script src="../assets/config.js"></script>
 <script src="../assets/gate.js" data-task="1"></script>
+
 <div class="wrap">
 <p class="back"><a href="../index.html">&larr; Back to the mainframe</a></p>
 <h1>Game 1: Decoding</h1>
@@ -42,11 +45,14 @@ section.card p{margin:0 0 10px}
 <span class="tag">TLP: RED &middot; LOG_7749 &middot; ENCRYPTED_PAYLOAD</span>
 <h2>1 &middot; The evidence</h2>
 <p>The full dump, exactly as recovered. Two pages of raw memory — decode it and find the passkey.</p>
-<div class="viewer"><object data="2-1.pdf#view=FitH" type="application/pdf" title="Incident LOG_7749 — raw memory fragment (PDF)"><p class="fallback"><b>Inline viewer unavailable on this device.</b><br>Use “Open the PDF” or “Download” below to read the incident dump.</p></object></div>
+
+<!-- Fixed path with ../ so it finds 2-1.pdf outside the tasks folder -->
+<div class="viewer"><object data="../2-1.pdf#view=FitH" type="application/pdf" title="Incident LOG_7749 — raw memory fragment (PDF)"><p class="fallback"><b>Inline viewer unavailable on this device.</b><br>Use “Open the PDF” or “Download” below to read the incident dump.</p></object></div>
 <p class="note">Viewer not showing on your device? Use the buttons.</p>
+
 <div class="toolbar">
-<a class="cta" href="2-1.pdf" target="_blank" rel="noopener">Open the PDF &nearr;</a>
-<a class="cta alt" href="2-1.pdf" download>Download &darr;</a>
+<a class="cta" href="../2-1.pdf" target="_blank" rel="noopener">Open the PDF &nearr;</a>
+<a class="cta alt" href="../2-1.pdf" download>Download &darr;</a>
 </div>
 </section>
 

@@ -11,9 +11,17 @@
     try { if (n > getUnlocked()) localStorage.setItem(KEY, String(n)); } catch (e) {}
   }
   window.hashCode = hashCode;
-  window.Gate = { getUnlocked, setUnlocked, hashCode };
+
+  // Progress can also ride in the URL (#u=2). This keeps the gate working in
+  // contexts where localStorage is blocked or split per file (file:// previews).
+  const link = /(?:^|[#&?])u=(\d+)/.exec(location.search + location.hash);
+  const linkLevel = link ? parseInt(link[1], 10) : 0;
+  if (linkLevel > 0) setUnlocked(linkLevel);
+  function unlocked() { return Math.max(getUnlocked(), linkLevel); }
+
+  window.Gate = { getUnlocked: unlocked, setUnlocked, hashCode };
 
   // On task pages: <script src="../assets/gate.js" data-task="3"></script>
   const me = document.currentScript && document.currentScript.dataset.task;
-  if (me && parseInt(me, 10) > getUnlocked()) location.replace("../index.html");
+  if (me && parseInt(me, 10) > unlocked()) location.replace("../index.html");
 })();

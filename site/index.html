@@ -42,7 +42,7 @@ function render(){
     const open=t.n<=un,c=document.createElement("section");
     c.className="task"+(open?"":" locked");
     c.innerHTML=`<span class="badge ${open?"open":""}">${open?"Unlocked":"Locked"}</span><h2>Game ${t.n}: ${t.title}</h2><p>${t.blurb}</p>`;
-    if(open){const a=document.createElement("a");a.className="go";a.href=t.file;a.textContent="Start game "+t.n;c.appendChild(a)}
+    if(open){const a=document.createElement("a");a.className="go";a.href=t.file+"#u="+t.n;a.textContent="Start game "+t.n;c.appendChild(a)}
     else if(t.n===un+1){
       c.insertAdjacentHTML("beforeend",`<p class="hint">Enter the code from Game ${t.n-1} to unlock this game.</p><form><input aria-label="Code for game ${t.n}" placeholder="Enter code" autocomplete="off" autocapitalize="off" spellcheck="false"><button>Unlock</button></form><div class="err" role="alert"></div>`);
       const f=c.querySelector("form"),i=c.querySelector("input"),e=c.querySelector(".err");
